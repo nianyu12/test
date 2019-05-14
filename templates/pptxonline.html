@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block main %}
+    <style>
+        .frame_style{
+            width: 60%;
+            height: 110%;
+            text-align:center;
+        }
+        .wrap{
+            margin:0 auto;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="warp" style="height: 595px">
+                <iframe class="frame_style" src="http://127.0.0.1:5000/static/pdfjs-2.0.943-dist/web/viewer.html?file=\static\upload2\test2.pptx.pdf">
+                </iframe>
+            </div>
+        </div>
+    </div>
+{% endblock %}

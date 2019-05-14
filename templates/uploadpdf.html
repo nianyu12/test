@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block main %}
+    <style type="text/css" media="screen">
+            #input {
+                width:80%;            }
+
+        </style>
+<head>
+    <meta charset="UTF-8">
+    <title>词云</title>
+</head>
+<body>
+    <h1 align="center">请上传Pdf文件</h1>
+<div style="width:100%;text-align:center">
+    <form action="" enctype='multipart/form-data' method='POST'>
+        <div align="center">
+        <input class="btn btn-default" type="file" name="pdf" id="input">
+            </div>
+        <input class="btn btn-default" type="submit" value="上传">
+    </form>
+    </div>
+</body>
+
+{% endblock %}

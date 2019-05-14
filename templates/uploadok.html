@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block main %}
+    <style type="text/css" media="screen">
+            #input {
+                width:80%;
+            }
+             #tu {
+                width:200%;
+            }
+        </style>
+<head>
+    <meta charset="UTF-8">
+    <title>词云</title>
+</head>
+<body>
+    <h1 align="center">请上传Pdf文件</h1>
+<div style="width:100%;text-align:center">
+    <form action="" enctype='multipart/form-data' method='POST'>
+        <div align="center">
+        <input class="btn btn-default" type="file" name="file" id="input">
+            </div>
+        <input class="btn btn-default" type="submit" value="上传">
+    </form>
+    </div>
+
+</body>
+<div align="center">
+    <a>
+          <img class="logo" src="{{ url_for('static',filename='th.jpg') }}" alt="" style="margin: 0 auto;">
+      </a>
+</div>
+{% endblock %}

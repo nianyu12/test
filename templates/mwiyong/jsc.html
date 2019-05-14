@@ -1,0 +1,77 @@
+{% extends "base.html" %}{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <style>
+        .frame_style{
+            width: 120%;
+            height: 120%;
+            text-align:center;
+        }
+        .wrap{
+            margin:0 auto;
+        }
+    </style>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.worker.js"></script>
+{% endblock %}
+
+{% block body %}
+    <canvas id="pdf-canvas"></canvas>
+    <div id="container">
+    <script>
+    var container, pageDiv;
+    var url = '\\static\uploads\\test1.pdf';
+function getPDF(url) {
+
+    PDFJS.getDocument(url).then((pdf) => {
+        pdfDoc = pdf;
+        container = document.getElementById('container');
+        for (var i = 1; i<= pdf.numPages; i++) {
+            renderPDF(i);
+        }
+    })
+}
+
+function renderPDF(num) {
+    pdf.getPage(num).then((page) => {
+        var scale = 1.5;
+        var viewport = page.getViewport(scale);
+        pageDiv = document.createElement('div');
+        pageDiv.setAttribute('id', 'page-' + (page.pageIndex + 1));
+        pageDiv.setAttribute('style', 'position: relative');
+        container.appendChild(pageDiv);
+        var canvas = document.createElement('canvas');
+        pageDiv.appendChild(canvas);
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = view.width;
+
+        var renderContext = {
+            canvasContext: context,
+            viewport: viewport
+        };
+
+        page.render(renderContext).then(() => {
+    return page.getTextContent();
+}).then((textContent) => {
+    // 创建文本图层div
+    const textLayerDiv = document.createElement('div');
+    textLayerDiv.setAttribute('class', 'textLayer');
+    // 将文本图层div添加至每页pdf的div中
+    pageDiv.appendChild(textLayerDiv);
+
+    // 创建新的TextLayerBuilder实例
+    var textLayer = new TextLayerBuilder({
+        textLayerDiv: textLayerDiv,
+        pageIndex: page.pageIndex,
+        viewport: viewport
+    });
+
+    textLayer.setTextContent(textContent);
+
+    textLayer.render();
+});
+    });
+}
+</script>
+    </div>
